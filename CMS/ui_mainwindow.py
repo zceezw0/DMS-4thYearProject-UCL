@@ -6,6 +6,7 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1060, 578)
+        # Use pyside to initialize our UI interface
         self.actionOpen_camera = QAction(MainWindow)
         self.actionOpen_camera.setObjectName(u"actionOpen_camera")
         self.centralwidget = QWidget(MainWindow)
@@ -21,11 +22,13 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.label)
 
+        # Set corresponding information in horizontalLayout
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
 
+        # Set corresponding information in horizontalLayout_5
         self.label_10 = QLabel(self.centralwidget)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setMaximumSize(QSize(150, 30))
@@ -34,6 +37,7 @@ class Ui_MainWindow(object):
         self.label_9.setObjectName(u"label_9")
         self.label_9.setMaximumSize(QSize(150, 30))
 
+        # Set corresponding information in horizontalLayout_5
         self.horizontalLayout_5.addWidget(self.label_10)
         self.horizontalLayout_5.addWidget(self.label_9)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
@@ -46,6 +50,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.label_3)
 
+        # Set corresponding information in horizontalLayout_2
         self.label_4 = QLabel(self.centralwidget)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setMaximumSize(QSize(150, 30))
@@ -56,7 +61,6 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName(u"label_5")
         self.label_5.setMaximumSize(QSize(150, 30))
 
-        # self.horizontalLayout_5.addWidget(self.label_5)
         self.horizontalLayout_13= QHBoxLayout()
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
 
@@ -66,6 +70,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_13.addWidget(self.label_13)
 
+        # Set corresponding information in horizontalLayout_13
         self.label_14 = QLabel(self.centralwidget)
         self.label_14.setObjectName(u"label_14")
         self.label_14.setMaximumSize(QSize(150, 30))
@@ -83,6 +88,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addLayout(self.verticalLayout)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
 
+        # Add some bar
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -102,10 +108,10 @@ class Ui_MainWindow(object):
         QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        # set label text
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.actionOpen_camera.setText(QCoreApplication.translate("MainWindow", u"Open camera", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"", None))
-        # self.label_2.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))

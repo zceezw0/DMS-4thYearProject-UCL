@@ -4,6 +4,7 @@ import sys
 from tqdm import tqdm
 
 def save_result_video(image_save_root, video_save_path,fps):
+    # Reassemble the detected image into a video and save it
     files = os.listdir(image_save_root)
     num = len(files)
     if num == 0:
@@ -16,6 +17,7 @@ def save_result_video(image_save_root, video_save_path,fps):
     fourcc = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
     video_writer = cv2.VideoWriter(video_save_path, fourcc, fps, (w,h))
 
+    # write video
     for i in tqdm(range(num)):
         image_path = os.path.join(image_save_root,"%05d.jpg"%(i))
         frame = cv2.imread(image_path)

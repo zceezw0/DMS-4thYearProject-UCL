@@ -1,38 +1,28 @@
-## Tired Driving Detecting 
+## Camera Monitoring System 
 
 ### 1.Requirement
 
-Windows + 摄像头 即可运行
+Windows + camera to run
 
-必要的软件包：
+Necessary software packages:
 
 - Python 3
-
 - pytorch == 1.3
-
 - torchvision == 0.4.1
-
 - PySide2
-
 - csv
-
 - dlib == 19.6.1
-
 - opencv-python
-
 - scipy
-
 - imutils
-
 - onnx
-
 - onnxruntime
 
-未说明版本的python包，直接pip安装即可
+Python package of unspecified version can be installed directly through pip
 
 ### 2.How to use
 
-默认参数：
+Default parameters:
 
 ```
 parser.add_argument('-o','--output_path', default = "./output", type=str, help='store detection result')
@@ -41,23 +31,21 @@ parser.add_argument('-s', '--save_frame', action='store_true', help="save frames
 parser.add_argument('-t', '--time_step', default=30, type=int, help="interval per detection")
 ```
 
-output_path 表示输出文件的默认路径（如果不存在会自动创建）
+- output_ path indicates the default path of the output file (automatically created if it does not exist)
 
-input_video 表示输入源，如果是""表示使用的是摄像头输入，如果要使用video输入，使用video的绝对路径
+- input_ video indicates the input source. If "" indicates the camera input is used. If you want to use video input, use the absolute path of video
 
-save_frame 表示是否保存摄像头获取到的原始图片，布尔值
+- save_ frame indicates whether to save the original picture obtained by the camera, Boolean value
 
-time_step 表示保存结果的时间间隔，秒为单位
+- time_ step indicates the time interval for saving the results, in seconds
 
-以下命令为例，表示把结果保存在"./output_path"中，且保存所有原始图像，每十秒保存一次输出值。
+  Taking the following command as an example, it means to save the results in ". / output_path", save all original images, and save the output value every ten seconds.
 
 ```
 python main.py -o "./output_path" -s -t 10
 ```
 
-
-
-修改这一行，把anno.csv保存为你想要的名字，对于第一次摄像头采集，取名为1.csv，第二次，取名为2.csv，以此类推，采集你想要的实验数据。
+​	Modify this line and put anno CSV is saved as the name you want. For the first camera acquisition, it is named 1 CSV, the second time, named 2 CSV, and so on, collect the experimental data you want.
 
 ```
 anno_file = os.path.join(output_path, "anno.csv")

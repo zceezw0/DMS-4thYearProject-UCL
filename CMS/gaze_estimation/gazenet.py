@@ -13,20 +13,24 @@ class GazeNet(nn.Module):
     def __init__(self, device):    
         super(GazeNet, self).__init__()
         self.device = device
+        # Preprocessing input image
         self.preprocess = transforms.Compose([
             transforms.Resize((112,112)),
             transforms.ToTensor(),
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
 
+        # Initialize our model with mobilenetv2
         model = models.mobilenet_v2(pretrained=True)
         model.features[-1] = models.mobilenet.ConvBNReLU(320, 256, kernel_size=1)
         self.backbone = model.features
 
+        # Add some Convolution layer
         self.Conv1 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size=1, stride=1, padding=0)
         self.Conv2 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size=1, stride=1, padding=0)
         self.Conv3 = nn.Conv2d(in_channels=256, out_channels=1, kernel_size=1, stride=1, padding=0)
 
+        # Output layer, an MLP structure
         self.fc1 = nn.Sequential(
             nn.Linear(256*4*4, 512),
             nn.ReLU(),
@@ -39,22 +43,26 @@ class GazeNet(nn.Module):
         )   
         self.fc_final = nn.Linear(512, 2)
 
+        # Initialization parameter during training
         self._initialize_weight()
         self._initialize_bias()
         self.to(device)
 
 
     def _initialize_weight(self):
+        # init weight in Convolution layer
         nn.init.normal_(self.Conv1.weight, mean=0.0, std=0.01)
         nn.init.normal_(self.Conv2.weight, mean=0.0, std=0.01)
         nn.init.normal_(self.Conv3.weight, mean=0.0, std=0.001)
 
     def _initialize_bias(self):
+        # init bias in Convolution layer
         nn.init.constant_(self.Conv1.bias, val=0.1)
         nn.init.constant_(self.Conv2.bias, val=0.1)
         nn.init.constant_(self.Conv3.bias, val=1)
 
     def forward(self, x):
+        # forward network
         x = self.backbone(x)
         y = F.relu(self.Conv1(x))
         y = F.relu(self.Conv2(y))
@@ -69,6 +77,7 @@ class GazeNet(nn.Module):
         return gaze
 
     def get_gaze(self, img):
+        # get gaze in test
         img = Image.fromarray(img)
         img = self.preprocess(img)[np.newaxis,:,:,:]
         x = self.forward(img.to(self.device))
